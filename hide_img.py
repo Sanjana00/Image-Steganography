@@ -46,11 +46,9 @@ if not os.path.exists(path1) or not os.path.exists(path2):
     print('Error: File does not exist')
     sys.exit(0)
 
-img1 = cv2.imread(source + sys.argv[1], cv2.IMREAD_UNCHANGED)
-cv2.resize(img1, (1920, 1080))
+img1 = cv2.resize(cv2.imread(source + sys.argv[1], cv2.IMREAD_UNCHANGED), (960, 540))
 
-img2 = cv2.imread(source + sys.argv[2], cv2.IMREAD_UNCHANGED)
-cv2.resize(img2, (1920, 1080))
+img2 = cv2.resize(cv2.imread(source + sys.argv[2], cv2.IMREAD_UNCHANGED), (960, 540))
 
 out = encrypt(img1, img2)
 cv2.imwrite(dest + output + '.jpg', out)
