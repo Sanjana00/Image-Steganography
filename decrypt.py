@@ -6,7 +6,7 @@ import random
 import sys
 import os
 
-source = 'encryption/'
+source = 'encrypt/'
 dest = 'decrypt/'
 
 def decrypt(img):
