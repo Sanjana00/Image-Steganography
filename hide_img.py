@@ -14,7 +14,7 @@ dimensions = (960, 540)
 def encrypt(img1, img2):
     for x in range(img2.shape[0]):
         for y in range(img2.shape[1]):
-            for z in range(img2.shape[2]):
+            for z in range(3):
                 v1 = format(img1[x][y][z], '08b')
                 v2 = format(img2[x][y][z], '08b')
 
@@ -48,9 +48,8 @@ if not os.path.exists(path1) or not os.path.exists(path2):
     print('Error: File does not exist')
     sys.exit(0)
 
-img1 = cv2.resize(cv2.imread(source + sys.argv[1], cv2.IMREAD_UNCHANGED), dimensions)
+img1 = cv2.resize(cv2.imread(source + sys.argv[1]), dimensions)
 
-img2 = cv2.resize(cv2.imread(source + sys.argv[2], cv2.IMREAD_UNCHANGED), dimensions)
+img2 = cv2.resize(cv2.imread(source + sys.argv[2]), dimensions)
 
-out = encrypt(img1, img2)
-cv2.imwrite(dest + output + '.jpg', out)
+cv2.imwrite(dest + output + '.png', encrypt(img1, img2))
