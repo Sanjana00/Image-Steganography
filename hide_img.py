@@ -7,7 +7,7 @@ import random
 import os
 
 source = 'img/'
-dest = 'encryption/'
+dest = 'encrypt/'
 
 dimensions = (960, 540)
 
