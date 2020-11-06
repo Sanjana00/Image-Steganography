@@ -5,11 +5,18 @@ import numpy as np
 import sys
 import random
 import os
+from math import floor
 
 source = 'img/'
 dest = 'encrypt/'
 
-dimensions = (960, 540)
+def resize(img1, img2):
+    w1, h1, d1 = img1.shape
+    w2, h2, d2 = img2.shape
+
+    ratio = min(w1 / w2, h1 / h2, 1)
+
+    return floor(ratio * h2), floor(ratio * w2)
 
 def encrypt(img1, img2):
     for x in range(img2.shape[0]):
@@ -48,8 +55,10 @@ if not os.path.exists(path1) or not os.path.exists(path2):
     print('Error: File does not exist')
     sys.exit(0)
 
-img1 = cv2.resize(cv2.imread(source + sys.argv[1]), dimensions)
+img1 = cv2.imread(source + sys.argv[1])
 
-img2 = cv2.resize(cv2.imread(source + sys.argv[2]), dimensions)
+img2 = cv2.imread(source + sys.argv[2])
 
-cv2.imwrite(dest + output + '.png', encrypt(img1, img2))
+img2_resized = cv2.resize(img2, resize(img1, img2))
+
+cv2.imwrite(dest + output + '.png', encrypt(img1, img2_resized))
